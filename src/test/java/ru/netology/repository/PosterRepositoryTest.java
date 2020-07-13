@@ -14,7 +14,7 @@ class PosterRepositoryTest {
 
 
     @BeforeEach
-    void add11Elements() {
+    void add3Elements() {
         repository.save(elem1);
         repository.save(elem2);
         repository.save(elem3);
