@@ -18,8 +18,8 @@ class PosterManagerOneElementTest {
     @Mock
     private PosterRepository posterRepository;
     @InjectMocks
-    PosterManager posterManager;
-    PosterItem elem = new PosterItem(1, 1, "The favourite");
+    private PosterManager posterManager = new PosterManager();
+    private final PosterItem elem = new PosterItem(1, "The favourite");
 
     @BeforeEach
     public void addElementToPostManager() {
@@ -27,42 +27,11 @@ class PosterManagerOneElementTest {
     }
 
     @Test
-    public void shouldGetLast10() {
+    public void shouldGetLasts() {
         PosterItem[] returned = new PosterItem[]{elem};
         doReturn(returned).when(posterRepository).findAll();
 
-        PosterItem[] actual = posterManager.getLast10();
-        PosterItem[] expected = new PosterItem[]{elem};
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldRemoveById() {
-        int idToRemove = 1;
-        PosterItem[] returned = new PosterItem[] {};
-        doReturn(returned).when(posterRepository).findAll();
-        doNothing().when(posterRepository).removeById(idToRemove);
-
-        posterManager.removeById(idToRemove);
-
-        PosterItem[] actual = posterManager.getLast10();
-        PosterItem[] expected = new PosterItem[]{};
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNotRemoveIfNotExists() {
-        int idToRemove = 2;
-
-        PosterItem[] returned = new PosterItem[] {elem};
-        doReturn(returned).when(posterRepository).findAll();
-        doNothing().when(posterRepository).removeById(idToRemove);
-
-        posterManager.removeById(idToRemove);
-
-        PosterItem[] actual = posterManager.getLast10();
+        PosterItem[] actual = posterManager.getLasts();
         PosterItem[] expected = new PosterItem[]{elem};
 
         assertArrayEquals(expected, actual);

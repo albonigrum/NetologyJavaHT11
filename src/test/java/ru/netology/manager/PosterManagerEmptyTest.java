@@ -1,6 +1,5 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -19,31 +18,15 @@ class PosterManagerEmptyTest {
     private PosterRepository posterRepository;
 
     @InjectMocks
-    private PosterManager posterManager;
+    private PosterManager posterManager = new PosterManager();
 
+    @Test
+    public void shouldGetLasts() {
+        PosterItem[] returned = new PosterItem[] {};
+        doReturn(returned).when(posterRepository).findAll();
 
-    @AfterEach
-    public void checkThatEmpty() {
-        PosterItem[] actual = posterManager.getLast10();
+        PosterItem[] actual = posterManager.getLasts();
         PosterItem[] expected = new PosterItem[]{};
-
         assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldGetLast10() {
-        PosterItem[] returned = new PosterItem[] {};
-        doReturn(returned).when(posterRepository).findAll();
-    }
-
-    @Test
-    public void shouldNotRemoveIfNotExists() {
-        int idToRemove = 1;
-
-        PosterItem[] returned = new PosterItem[] {};
-        doReturn(returned).when(posterRepository).findAll();
-        doNothing().when(posterRepository).removeById(idToRemove);
-
-        posterManager.removeById(idToRemove);
     }
 }

@@ -18,7 +18,7 @@ public class PosterRepository {
 
     public PosterItem findById(int id) {
         for (PosterItem item : items) {
-            if (item.getId() == id) {
+            if (item.getProductId() == id) {
                 return item;
             }
         }
@@ -26,7 +26,7 @@ public class PosterRepository {
     }
 
     public void removeById(int id) {
-        items.removeIf(elem -> (elem.getId() == id));
+        items.removeIf(elem -> (elem.getProductId() == id));
     }
 
     public void removeAll() {

@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PosterRepositoryTest {
     PosterRepository repository = new PosterRepository();
-    private final PosterItem elem1 = new PosterItem(1, 1, "elem1");
-    private final PosterItem elem2 = new PosterItem(2, 2, "elem2");
-    private final PosterItem elem3 = new PosterItem(3, 3, "elem3");
+    private final PosterItem elem1 = new PosterItem(1, "elem1");
+    private final PosterItem elem2 = new PosterItem(2, "elem2");
+    private final PosterItem elem3 = new PosterItem(3, "elem3");
 
 
     @BeforeEach
