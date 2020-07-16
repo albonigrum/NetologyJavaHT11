@@ -18,7 +18,7 @@ class PosterManagerEmptyTest {
     private PosterRepository posterRepository;
 
     @InjectMocks
-    private PosterManager posterManager = new PosterManager();
+    private PosterManager posterManager;
 
     @Test
     public void shouldGetLasts() {

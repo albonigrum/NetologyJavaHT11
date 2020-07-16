@@ -7,14 +7,14 @@ import ru.netology.domain.PosterItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PosterRepositoryTest {
-    PosterRepository repository = new PosterRepository();
+    private PosterRepository repository = new PosterRepository();
     private final PosterItem elem1 = new PosterItem(1, "elem1");
     private final PosterItem elem2 = new PosterItem(2, "elem2");
     private final PosterItem elem3 = new PosterItem(3, "elem3");
 
 
     @BeforeEach
-    void add3Elements() {
+    void setUp() {
         repository.save(elem1);
         repository.save(elem2);
         repository.save(elem3);
@@ -33,9 +33,8 @@ class PosterRepositoryTest {
         int idToFind = 2;
 
         PosterItem actual = repository.findById(idToFind);
-        PosterItem expected = elem2;
 
-        assertEquals(expected, actual);
+        assertEquals(elem2, actual);
     }
 
     @Test
@@ -43,9 +42,8 @@ class PosterRepositoryTest {
         int idToFind = 4;
 
         PosterItem actual = repository.findById(idToFind);
-        PosterItem expected = null;
 
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 
 

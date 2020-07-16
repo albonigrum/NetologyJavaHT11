@@ -18,7 +18,7 @@ class PosterManagerOneElementTest {
     @Mock
     private PosterRepository posterRepository;
     @InjectMocks
-    private PosterManager posterManager = new PosterManager();
+    private PosterManager posterManager;
     private final PosterItem elem = new PosterItem(1, "The favourite");
 
     @BeforeEach

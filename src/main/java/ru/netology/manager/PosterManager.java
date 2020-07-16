@@ -10,11 +10,13 @@ public class PosterManager {
   private PosterRepository repository;
   private ArrayList<PosterItem> items = new ArrayList<>();
 
-  public PosterManager() {}
+  //Без него не хочет работать Mockito(
+  private PosterManager() {}
 
   public PosterManager(PosterRepository repository) {this.repository = repository;}
 
-  public PosterManager(int maxReturnedArraySize) {
+  public PosterManager(PosterRepository repository, int maxReturnedArraySize) {
+    this.repository = repository;
     if (maxReturnedArraySize > 0)
       this.maxReturnedArraySize = maxReturnedArraySize;
   }

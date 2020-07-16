@@ -1,20 +1,25 @@
 package ru.netology.manager;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.PosterItem;
 import ru.netology.repository.PosterRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 
+
+
+@ExtendWith(MockitoExtension.class)
 public class PosterManagerMoreThanOneElementTest {
   @Mock
   private PosterRepository posterRepository;
   @InjectMocks
   private PosterManager posterManager;
+
   private final PosterItem elem1 = new PosterItem(1, "elem1");
   private final PosterItem elem2 = new PosterItem(2, "elem2");
   private final PosterItem elem3 = new PosterItem(3, "elem3");
@@ -52,10 +57,10 @@ public class PosterManagerMoreThanOneElementTest {
     posterManager.add(elem10);
     posterManager.add(elem11);
   }
-  
+
   @Test
   public void shouldAddDefaultConstructor() {
-    posterManager = new PosterManager();
+    posterManager = new PosterManager(posterRepository);
     add11Elements();
     PosterItem[] returned = new PosterItem[]{elem1, elem2, elem3, elem4, elem5, elem6, elem7, elem8, elem9, elem10, elem11};
     doReturn(returned).when(posterRepository).findAll();
@@ -68,7 +73,7 @@ public class PosterManagerMoreThanOneElementTest {
 
   @Test
   public void shouldAddOneArgConstructorValidValue() {
-    posterManager = new PosterManager(7);
+    posterManager = new PosterManager(posterRepository, 7);
     add11Elements();
     PosterItem[] returned = new PosterItem[]{elem1, elem2, elem3, elem4, elem5, elem6, elem7, elem8, elem9, elem10, elem11};
     doReturn(returned).when(posterRepository).findAll();
@@ -81,7 +86,7 @@ public class PosterManagerMoreThanOneElementTest {
 
   @Test
   public void shouldAddOneArgConstructorNoValidValue() {
-    posterManager = new PosterManager(-10);
+    posterManager = new PosterManager(posterRepository,-10);
     add11Elements();
     PosterItem[] returned = new PosterItem[]{elem1, elem2, elem3, elem4, elem5, elem6, elem7, elem8, elem9, elem10, elem11};
     doReturn(returned).when(posterRepository).findAll();
