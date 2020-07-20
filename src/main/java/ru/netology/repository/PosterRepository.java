@@ -2,18 +2,20 @@ package ru.netology.repository;
 
 import ru.netology.domain.PosterItem;
 
-import java.util.ArrayList;
 
 public class PosterRepository {
-    private ArrayList<PosterItem> items = new ArrayList<>();
+    private PosterItem[] items = new PosterItem[0];
 
 
     public PosterItem[] findAll() {
-        return items.toArray(new PosterItem[0]);
+        return items;
     }
 
     public void save(PosterItem item) {
-        items.add(item);
+        PosterItem[] tmp = new PosterItem[items.length + 1];
+        System.arraycopy(items, 0, tmp, 0, items.length);
+        tmp[tmp.length - 1] = item;
+        items = tmp;
     }
 
     public PosterItem findById(int id) {
@@ -26,10 +28,18 @@ public class PosterRepository {
     }
 
     public void removeById(int id) {
-        items.removeIf(elem -> (elem.getProductId() == id));
+        if (findById(id) != null) {
+            PosterItem[] tmp = new PosterItem[items.length - 1];
+            int index = 0;
+            for (PosterItem item : items){
+                if (item.getProductId() != id)
+                    tmp[index++] = item;
+            }
+            items = tmp;
+        }
     }
 
     public void removeAll() {
-        items.clear();
+        items = new PosterItem[0];
     }
 }

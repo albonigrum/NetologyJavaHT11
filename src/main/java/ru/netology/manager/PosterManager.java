@@ -3,12 +3,9 @@ package ru.netology.manager;
 import ru.netology.domain.PosterItem;
 import ru.netology.repository.PosterRepository;
 
-import java.util.ArrayList;
-
 public class PosterManager {
   private int maxReturnedArraySize = 10;
   private PosterRepository repository;
-  private ArrayList<PosterItem> items = new ArrayList<>();
 
   //Без него не хочет работать Mockito(
   private PosterManager() {}
